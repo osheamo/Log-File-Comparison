@@ -40,35 +40,54 @@ namespace Log_File_Comparison
         
         //}
 
-        private void processButton_Click(object sender, EventArgs e)
+        private void parseFilesButton_Click(object sender, EventArgs e)
         {
+            
             long fileSize;
+            long stringSize;
+            long progress = 0;
             string filePath = textBoxFilePath.Text;
             string columnNames = "";
-            int counter = 0;
+            //int counter = 0;
             int SD = 0;
             int SCO = 1;
             DataTable logFileDataTable = new DataTable();
             logFileDataTable.Columns.Add("SD");
             logFileDataTable.Columns.Add("SCO");
-            
 
             StreamReader streamReader = new StreamReader(filePath);
             string[] logFileData = new string[File.ReadAllLines(filePath).Length];
 
             FileInfo f = new FileInfo(filePath);
             fileSize = f.Length;
+
+            //progress bar
+            loadingForm loadAndParse = new loadingForm(dataGridViewFiles, this, fileSize, progress);
+            loadAndParse.Show();
+
             string probId = "";
             int columnCount = 2; 
             bool endOfLog = false;
             string[] filteredLogfile = new  string[2]; 
             string line = streamReader.ReadLine();
-            logFileData = line.Split('\n'); 
+            logFileData = line.Split('\n');
 
+            stringSize = line.Length + 2;
+            progress += stringSize;
             while (!streamReader.EndOfStream)
             {
                 line = streamReader.ReadLine();
                 logFileData = line.Split('\n');
+                stringSize = line.Length + 2;
+                progress += stringSize;
+                loadAndParse.setFilterprogress(progress);
+
+                if (loadAndParse.iscanceled())
+                {
+                    loadAndParse.Close();
+                    break;
+                }
+                Application.DoEvents();
                 //get the first pipe and go back 3. Get the last pipe and +1
                 foreach (var logLine in logFileData)
                 {
@@ -107,16 +126,20 @@ namespace Log_File_Comparison
 
                 }//end foreach loop
 
+                //If it hasn't reached the end of a log file
                 AddTableData(SD, SCO, logFileDataTable, endOfLog, filteredLogfile);
-                EndOfLogFile(ref columnNames, ref counter, SD, SCO, logFileDataTable, probId, columnCount, ref endOfLog, filteredLogfile);
 
+                //If it has reached the end of a log file
+                EndOfLogFile(ref columnNames, SD, SCO, logFileDataTable, probId, columnCount, ref endOfLog, filteredLogfile);
+                
             }//end while loop   
 
-            MessageBox.Show("Files parsed");
+            loadAndParse.Close();
+            MessageBox.Show("Your files have been parsed and saved");
 
         }
-
-        private void EndOfLogFile(ref string columnNames, ref int counter, int SD, int SCO, DataTable logFileDataTable, string probId, int columnCount, ref bool endOfLog, string[] filteredLogfile)
+        
+        private void EndOfLogFile(ref string columnNames,  int SD, int SCO, DataTable logFileDataTable, string probId, int columnCount, ref bool endOfLog, string[] filteredLogfile)
         {
             if (endOfLog)
             {
@@ -125,7 +148,7 @@ namespace Log_File_Comparison
                     dataGridViewFiles.DataSource = logFileDataTable;
                     if (logFileDataTable.Rows.Count != 0)
                     {
-                        SaveLogToTxtFile(ref columnNames, ref counter, probId, columnCount);
+                        SaveLogToTxtFile(ref columnNames, probId, columnCount);
                         dataGridViewFiles.DataSource = null;
 
                         logFileDataTable.Rows.Clear();
@@ -163,7 +186,7 @@ namespace Log_File_Comparison
             }
         }
 
-        private void SaveLogToTxtFile(ref string columnNames, ref int counter, string probId, int columnCount)
+        private void SaveLogToTxtFile(ref string columnNames, string probId, int columnCount)
         {
             using (StreamWriter sw = new StreamWriter("p" + probId + ".txt"))
             {
@@ -192,7 +215,7 @@ namespace Log_File_Comparison
                         {
                             continue;
                         }
-                        counter++;
+                       
                     }
                     sw.WriteLine(rowdata);
                     //break out of loop to avoid null object reference
@@ -202,7 +225,7 @@ namespace Log_File_Comparison
             }
         }
      
-        //to open notepad in window
+        //to open notepad
         [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hwc, IntPtr hwp);
         private void Notepad_Click(object sender, EventArgs e)
@@ -216,6 +239,13 @@ namespace Log_File_Comparison
         private void exitButton_Click(object sender, EventArgs e)
         {
                 this.Close();
+        }
+
+        //this is to allow the debugging of the cluster details form
+        private void chart1_Click(object sender, EventArgs e)
+        {          
+            ClusterDetailsForm frm2 = new ClusterDetailsForm();
+            frm2.ShowDialog();       
         }
     }
 }

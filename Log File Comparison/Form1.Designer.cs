@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxFilePath = new System.Windows.Forms.TextBox();
             this.processButton = new System.Windows.Forms.Button();
@@ -46,8 +46,9 @@
             this.linesLabel = new System.Windows.Forms.Label();
             this.clusterLabel = new System.Windows.Forms.Label();
             this.toleranceLabel = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.listBoxDetails = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.linesNumericUpDown)).BeginInit();
@@ -82,7 +83,7 @@
             this.tableLayoutPanel1.Controls.Add(this.textBoxFilePath, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.processButton, 16, 3);
             this.tableLayoutPanel1.Controls.Add(this.browseButton, 16, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewFiles, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewFiles, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.Notepad, 16, 14);
             this.tableLayoutPanel1.Controls.Add(this.linesNumericUpDown, 16, 5);
             this.tableLayoutPanel1.Controls.Add(this.clusterNumericUpDown, 16, 7);
@@ -94,6 +95,7 @@
             this.tableLayoutPanel1.Controls.Add(this.clusterLabel, 16, 6);
             this.tableLayoutPanel1.Controls.Add(this.toleranceLabel, 16, 8);
             this.tableLayoutPanel1.Controls.Add(this.chart1, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.listBoxDetails, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -160,7 +162,7 @@
             this.processButton.TabIndex = 3;
             this.processButton.Text = "Parse Files";
             this.processButton.UseVisualStyleBackColor = true;
-            this.processButton.Click += new System.EventHandler(this.processButton_Click);
+            this.processButton.Click += new System.EventHandler(this.parseFilesButton_Click);
             // 
             // browseButton
             // 
@@ -177,12 +179,11 @@
             // dataGridViewFiles
             // 
             this.dataGridViewFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewFiles, 14);
-            this.dataGridViewFiles.Location = new System.Drawing.Point(43, 69);
+            this.dataGridViewFiles.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewFiles.Name = "dataGridViewFiles";
-            this.tableLayoutPanel1.SetRowSpan(this.dataGridViewFiles, 8);
-            this.dataGridViewFiles.Size = new System.Drawing.Size(554, 258);
+            this.dataGridViewFiles.Size = new System.Drawing.Size(34, 26);
             this.dataGridViewFiles.TabIndex = 0;
+            this.dataGridViewFiles.Visible = false;
             // 
             // Notepad
             // 
@@ -311,27 +312,38 @@
             this.toleranceLabel.TabIndex = 12;
             this.toleranceLabel.Text = "Min Tolerance LD";
             // 
+            // chart1
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            this.tableLayoutPanel1.SetColumnSpan(this.chart1, 14);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
+            this.chart1.Location = new System.Drawing.Point(43, 366);
+            this.chart1.Name = "chart1";
+            this.tableLayoutPanel1.SetRowSpan(this.chart1, 8);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
+            this.chart1.Size = new System.Drawing.Size(554, 258);
+            this.chart1.TabIndex = 15;
+            this.chart1.Text = "chart1";
+            this.chart1.Click += new System.EventHandler(this.chart1_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // chart1
+            // listBoxDetails
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.tableLayoutPanel1.SetColumnSpan(this.chart1, 14);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(43, 366);
-            this.chart1.Name = "chart1";
-            this.tableLayoutPanel1.SetRowSpan(this.chart1, 8);
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(554, 258);
-            this.chart1.TabIndex = 15;
-            this.chart1.Text = "chart1";
+            this.tableLayoutPanel1.SetColumnSpan(this.listBoxDetails, 14);
+            this.listBoxDetails.FormattingEnabled = true;
+            this.listBoxDetails.Location = new System.Drawing.Point(43, 102);
+            this.listBoxDetails.Name = "listBoxDetails";
+            this.tableLayoutPanel1.SetRowSpan(this.listBoxDetails, 7);
+            this.listBoxDetails.Size = new System.Drawing.Size(554, 225);
+            this.listBoxDetails.TabIndex = 16;
             // 
             // Form1
             // 
@@ -371,6 +383,7 @@
         private System.Windows.Forms.Label clusterLabel;
         private System.Windows.Forms.Label toleranceLabel;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.ListBox listBoxDetails;
     }
 }
 
