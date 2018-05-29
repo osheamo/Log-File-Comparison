@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cluster.cs" />
     <Compile Include="ClusterDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +73,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimilarityExtensions.cs" />
     <EmbeddedResource Include="ClusterDetailsForm.resx">
       <DependentUpon>ClusterDetailsForm.cs</DependentUpon>
     </EmbeddedResource>

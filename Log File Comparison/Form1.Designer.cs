@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxFilePath = new System.Windows.Forms.TextBox();
             this.processButton = new System.Windows.Forms.Button();
@@ -47,8 +47,10 @@
             this.clusterLabel = new System.Windows.Forms.Label();
             this.toleranceLabel = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.listBoxDetails = new System.Windows.Forms.ListBox();
+            this.labelPieChart = new System.Windows.Forms.Label();
+            this.btnDetails = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.linesNumericUpDown)).BeginInit();
@@ -96,6 +98,8 @@
             this.tableLayoutPanel1.Controls.Add(this.toleranceLabel, 16, 8);
             this.tableLayoutPanel1.Controls.Add(this.chart1, 1, 11);
             this.tableLayoutPanel1.Controls.Add(this.listBoxDetails, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelPieChart, 2, 10);
+            this.tableLayoutPanel1.Controls.Add(this.btnDetails, 16, 16);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -155,12 +159,12 @@
             // processButton
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.processButton, 3);
-            this.processButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.processButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.processButton.Location = new System.Drawing.Point(649, 102);
             this.processButton.Name = "processButton";
             this.processButton.Size = new System.Drawing.Size(108, 27);
             this.processButton.TabIndex = 3;
-            this.processButton.Text = "Parse Files";
+            this.processButton.Text = "Display Results";
             this.processButton.UseVisualStyleBackColor = true;
             this.processButton.Click += new System.EventHandler(this.parseFilesButton_Click);
             // 
@@ -255,6 +259,7 @@
             this.viewResultsButton.TabIndex = 9;
             this.viewResultsButton.Text = "View Results";
             this.viewResultsButton.UseVisualStyleBackColor = true;
+            this.viewResultsButton.Click += new System.EventHandler(this.viewResultsButton_Click);
             // 
             // exitButton
             // 
@@ -314,26 +319,24 @@
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.tableLayoutPanel1.SetColumnSpan(this.chart1, 14);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(43, 366);
             this.chart1.Name = "chart1";
             this.tableLayoutPanel1.SetRowSpan(this.chart1, 8);
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(554, 258);
             this.chart1.TabIndex = 15;
             this.chart1.Text = "chart1";
-            this.chart1.Click += new System.EventHandler(this.chart1_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.chart1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseClick);
+            this.chart1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseMove);
             // 
             // listBoxDetails
             // 
@@ -344,6 +347,29 @@
             this.tableLayoutPanel1.SetRowSpan(this.listBoxDetails, 7);
             this.listBoxDetails.Size = new System.Drawing.Size(554, 225);
             this.listBoxDetails.TabIndex = 16;
+            // 
+            // labelPieChart
+            // 
+            this.labelPieChart.AutoSize = true;
+            this.labelPieChart.Location = new System.Drawing.Point(83, 330);
+            this.labelPieChart.Name = "labelPieChart";
+            this.labelPieChart.Size = new System.Drawing.Size(0, 13);
+            this.labelPieChart.TabIndex = 17;
+            // 
+            // btnDetails
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.btnDetails, 3);
+            this.btnDetails.Location = new System.Drawing.Point(649, 531);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(108, 27);
+            this.btnDetails.TabIndex = 18;
+            this.btnDetails.Text = "Cluster Details";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -382,8 +408,10 @@
         private System.Windows.Forms.Label linesLabel;
         private System.Windows.Forms.Label clusterLabel;
         private System.Windows.Forms.Label toleranceLabel;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.ListBox listBoxDetails;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        public System.Windows.Forms.Label labelPieChart;
+        private System.Windows.Forms.Button btnDetails;
     }
 }
 

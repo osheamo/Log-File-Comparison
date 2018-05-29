@@ -12,6 +12,7 @@ namespace Log_File_Comparison
 {
     public partial class ClusterDetailsForm : Form
     {
+        public string logName = "";
         public ClusterDetailsForm()
         {
             InitializeComponent();
@@ -24,5 +25,13 @@ namespace Log_File_Comparison
             this.Close();
             
         }
+       
+        public void LogName(string name)
+        {
+            logName = name.ToString();
+            mainLogNameLabel.Text = logName.ToString();
+        }
+
+      
     }
 }

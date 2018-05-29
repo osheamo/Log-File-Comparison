@@ -33,10 +33,10 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.mainLogLabel = new System.Windows.Forms.Label();
             this.mainLogNameLabel = new System.Windows.Forms.Label();
-            this.linesLabel = new System.Windows.Forms.Label();
-            this.numberOfLinesLabel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.fileAppLabel = new System.Windows.Forms.Label();
+            this.numberOfLinesLabel = new System.Windows.Forms.Label();
+            this.linesLabel = new System.Windows.Forms.Label();
             this.runComparisonButton = new System.Windows.Forms.Button();
             this.backToMainButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
@@ -129,29 +129,6 @@
             this.mainLogNameLabel.TabIndex = 3;
             this.mainLogNameLabel.Text = "Log name";
             // 
-            // linesLabel
-            // 
-            this.linesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.linesLabel.AutoSize = true;
-            this.linesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linesLabel.Location = new System.Drawing.Point(483, 75);
-            this.linesLabel.Name = "linesLabel";
-            this.linesLabel.Size = new System.Drawing.Size(65, 25);
-            this.linesLabel.TabIndex = 4;
-            this.linesLabel.Text = "Lines:";
-            // 
-            // numberOfLinesLabel
-            // 
-            this.numberOfLinesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numberOfLinesLabel.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.numberOfLinesLabel, 2);
-            this.numberOfLinesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numberOfLinesLabel.Location = new System.Drawing.Point(563, 75);
-            this.numberOfLinesLabel.Name = "numberOfLinesLabel";
-            this.numberOfLinesLabel.Size = new System.Drawing.Size(116, 25);
-            this.numberOfLinesLabel.TabIndex = 5;
-            this.numberOfLinesLabel.Text = "num of lines";
-            // 
             // textBox1
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBox1, 4);
@@ -171,6 +148,29 @@
             this.fileAppLabel.Size = new System.Drawing.Size(184, 25);
             this.fileAppLabel.TabIndex = 7;
             this.fileAppLabel.Text = "External Application";
+            // 
+            // numberOfLinesLabel
+            // 
+            this.numberOfLinesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.numberOfLinesLabel.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.numberOfLinesLabel, 2);
+            this.numberOfLinesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numberOfLinesLabel.Location = new System.Drawing.Point(563, 75);
+            this.numberOfLinesLabel.Name = "numberOfLinesLabel";
+            this.numberOfLinesLabel.Size = new System.Drawing.Size(116, 25);
+            this.numberOfLinesLabel.TabIndex = 5;
+            this.numberOfLinesLabel.Text = "num of lines";
+            // 
+            // linesLabel
+            // 
+            this.linesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.linesLabel.AutoSize = true;
+            this.linesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linesLabel.Location = new System.Drawing.Point(483, 75);
+            this.linesLabel.Name = "linesLabel";
+            this.linesLabel.Size = new System.Drawing.Size(65, 25);
+            this.linesLabel.TabIndex = 4;
+            this.linesLabel.Text = "Lines:";
             // 
             // runComparisonButton
             // 
