@@ -18,7 +18,7 @@ namespace Log_File_Comparison
     public partial class Form1 : Form
     {
         public string LogFileName = "";
-
+        List<LogFile> LogList = new List<LogFile>();
         public Form1()
         {
             InitializeComponent();
@@ -167,7 +167,7 @@ namespace Log_File_Comparison
         //End of log file reached. Save and clear the rows for the next log.
         private void EndOfLogFile(ref string columnNames,  int SD, int SCO, DataTable logFileDataTable, string probId, int columnCount, ref bool endOfLog, string[] filteredLogfile)
         {
-
+            
             if (endOfLog)
             {
                 if (logFileDataTable != null)
@@ -177,15 +177,7 @@ namespace Log_File_Comparison
                     {
                         SaveLogToTxtFile(ref columnNames, probId, columnCount);
 
-                                string rowSignature = "";
-                                var results = from myRow in logFileDataTable.AsEnumerable()                       
-                                            select myRow;
-                                var topRows = results.Take(10);
-                                foreach (var item in topRows)
-                                {
-                                    rowSignature += item.ToString();
-                                }
-
+                        AddDataToLogList(logFileDataTable, probId);
                         dataGridViewFiles.DataSource = null;
 
                         logFileDataTable.Rows.Clear();
@@ -196,6 +188,30 @@ namespace Log_File_Comparison
                 endOfLog = false;
             }
         }
+
+        private void AddDataToLogList(DataTable logFileDataTable, string probId)
+        {
+            
+            int minLines = Convert.ToInt32(linesNumericUpDown.Value);
+            string rowSignature = "";
+
+            var results = from myRow in logFileDataTable.AsEnumerable()
+                          select myRow[1];
+            var topRows = results.Reverse().Take(minLines);
+
+            foreach (var item in topRows)
+            {
+                rowSignature += item.ToString();
+            }
+
+            LogList.Add(new LogFile
+            {
+                name = probId,
+                Signature = rowSignature,
+                LDvalue = 100
+            });
+        }
+
         private void TestLog()
         {
             LogFile l1 = new LogFile { name = "log1", Signature = "AAAAAAAAAA", LDvalue = 100 };
